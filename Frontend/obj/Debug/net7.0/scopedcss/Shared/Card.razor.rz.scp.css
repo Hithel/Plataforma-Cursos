@@ -1,0 +1,29 @@
+/* Estilos para la tarjeta */
+.card[b-rmjgulvh57] {
+    width: 300px; /* Ancho deseado */
+    margin: 20px; /* Margen exterior */
+    border: 1px solid #ccc; /* Borde para la tarjeta */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+  
+  .card-body[b-rmjgulvh57] {
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .card-title[b-rmjgulvh57] {
+    font-size: 20px; /* Tamaño del título */
+    margin-bottom: 10px; /* Margen inferior */
+  }
+  
+  .card-text[b-rmjgulvh57] {
+    font-size: 16px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+  }
+  
+  .card-img-top[b-rmjgulvh57] {
+    width: 100%; /* Ancho completo para la imagen */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  

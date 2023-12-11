@@ -1,0 +1,67 @@
+@page "/Cursos"
+
+@inject Frontend.Services.ApiService ApiService
+
+<PageTitle>Cursos</PageTitle>
+
+<h1>Cursos!</h1>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        @foreach (var Curso in ListCursos)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src="@Curso.Img" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Curso.Titulo</h5>
+                        <p class="card-text">@Curso.Descripcion</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Instructor: @Curso.NombreInstructor
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    List<Curso> ListCursos = new List<Curso>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Llamar al servicio ApiService para obtener el JSON
+        ApiService apiService = new ApiService(new HttpClient());
+        string jsonResponse = await apiService.GetCurso();
+
+        // Deserializar la respuesta JSON a una lista de objetos User
+        ListCursos = JsonConvert.DeserializeObject<List<Curso>>(jsonResponse);
+
+        foreach (var curso in ListCursos)
+        {
+            string nombreInstructorJson = await apiService.GetInstructor(curso.IdInstructorFk);
+
+            // Deserializar el JSON del instructor para obtener el campo 'nombre' con un alias 'Nombre'
+            dynamic instructorData = JsonConvert.DeserializeObject(nombreInstructorJson);
+            string nombreInstructor = instructorData.nombre; // Suponiendo que 'nombre' es el campo que deseas
+
+            // Asignar el nombre del instructor al campo correspondiente en el curso (usando el alias)
+            curso.NombreInstructor = nombreInstructor;
+        }
+
+    }
+
+
+    public class Curso
+    {
+        public int Id { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string Img { get; set; }
+        public int IdInstructorFk { get; set; }
+
+        public string NombreInstructor { get; set; }
+    }
+}

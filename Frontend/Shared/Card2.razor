@@ -1,0 +1,19 @@
+<div class="card custom-card">
+  <div class="card-body">
+    <h5 class="card-title">@Titulo</h5>
+    <h6 class="card-subtitle mb-2 text-muted">@Puntaje</h6>
+    <p class="card-text">@Descripcion</p>
+  </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Titulo { get; set; }
+
+    [Parameter]
+    public string Descripcion { get; set; }
+
+    [Parameter]
+    public double Puntaje { get; set; }
+}

@@ -1,0 +1,26 @@
+<div class="card">
+    <img src="@Img" class="card-img-top" alt="Card Image">
+    <div class="card-body">
+        <h5 class="card-title">@Titulo</h5>
+        <p class="card-text">@Descripcion</p>
+    </div>
+    <div class="card-footer text-muted">
+        Instructor: @Instructor
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public string Titulo { get; set; }
+
+    [Parameter]
+    public string Descripcion { get; set; }
+
+    [Parameter]
+    public string Img { get; set; }
+
+    [Parameter]
+    public string Instructor { get; set; }
+}

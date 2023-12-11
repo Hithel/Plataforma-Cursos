@@ -1,0 +1,96 @@
+@page "/CalificarCursos"
+
+@inject Frontend.Services.ApiService ApiService
+@inject NavigationManager NavigationManager
+@inject Frontend.Data.UserService UserService
+
+
+<form>
+    <div class="mb-3">
+        <label for="cursoSelect" class="form-label">Seleccionar Curso:</label>
+        <select class="form-select" id="cursoSelect" name="curso" @bind="selectedCurso">
+            @foreach (var CursoSimple in ListCursos)
+            {
+                <option value="@CursoSimple.Id">@CursoSimple.Titulo</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="puntajeInput" class="form-label">Puntaje:</label>
+        <input type="number" class="form-control" id="puntajeInput" name="puntaje" step="0.1" placeholder="Ingrese el puntaje" @bind="puntaje">
+        <!-- El atributo step permite números decimales -->
+    </div>
+    <div class="mb-3">
+        <label for="descripcionTextarea" class="form-label">Descripción:</label>
+        <textarea class="form-control" id="descripcionTextarea" name="descripcion" rows="3" placeholder="Ingrese una descripción" @bind="descripcion"></textarea>
+    </div>
+    <button @onclick="@(async () => await CalificarCurso())" class="btn btn-primary">Enviar</button>
+</form>
+
+@code {
+
+    List<CursoSimple> ListCursos = new List<CursoSimple>();
+
+    private Evaluacion evaluacion = new Evaluacion(); 
+
+    int selectedCurso;
+    double puntaje;
+    string descripcion;
+
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Llamar al servicio ApiService para obtener directamente la lista de CursoSimple
+        ApiService apiService = new ApiService(new HttpClient());
+        string jsonResponse = await apiService.GetCurso(); // Método para obtener directamente la lista de CursoSimple
+
+        // Deserializar la respuesta JSON a una lista de objetos CursoSimple
+        ListCursos = JsonConvert.DeserializeObject<List<CursoSimple>>(jsonResponse);
+
+
+    }
+
+    private  async Task CalificarCurso()
+    {
+
+        int UserId = UserService.UserId;
+        string UserName = UserService.UserName;
+
+        Console.WriteLine(UserId);
+        Console.WriteLine(UserName);
+
+        evaluacion.idUserFk = UserId;
+        evaluacion.idCursoFK = selectedCurso;
+        evaluacion.puntaje = puntaje;
+        evaluacion.descripcion = descripcion;
+
+        Console.WriteLine($"IdUsuario: {evaluacion.idUserFk}, IdCurso: {evaluacion.idCursoFK}, Puntaje: {evaluacion.puntaje}, Descripción: {evaluacion.descripcion}");
+        
+        await JSRuntime.InvokeVoidAsync("eval", "event.preventDefault();");
+        
+        string jsonData = JsonConvert.SerializeObject(evaluacion);
+
+
+        ApiService apiService = new ApiService(new HttpClient());
+        string jsonResponse = await apiService.PostEvaluacion(jsonData);
+
+        Console.WriteLine(jsonResponse);
+
+    }
+
+    public class CursoSimple
+    {
+        public int Id { get; set; }
+        public string Titulo  { get; set; }
+    }
+
+    public class Evaluacion
+    {
+        public int idUserFk { get; set; }
+        public int idCursoFK { get; set; }
+        public double puntaje { get; set; }
+        public string descripcion { get; set; }
+
+    }
+}

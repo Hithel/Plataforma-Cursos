@@ -1,0 +1,74 @@
+@page "/"
+@layout LoginLayout
+
+@inject Frontend.Services.ApiService ApiService
+@inject Frontend.Data.UserService UserService
+@inject NavigationManager navManager
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 border p-4">
+            <h3 class="text-center mb-4">Iniciar sesión</h3>
+            <div class="mb-3">
+                <label for="txtUserName" class="form-label">Correo</label>
+                <input id="txtUserName" @bind="@userData.UserName" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label for="txtPassword" class="form-label">Contraseña</label>
+                <input id="txtPassword" type="password" @bind="@userData.Password" class="form-control" />
+            </div>
+            <div class="mb-3 d-grid">
+                <button @onclick="IniciarSesion" class="btn btn-primary">Ingresar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code 
+{
+    private UserData userData = new UserData();
+
+    public class UserData
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+
+    private  async Task IniciarSesion()
+    {
+
+        string jsonData = JsonConvert.SerializeObject(userData);
+
+        ApiService apiService = new ApiService(new HttpClient());
+        
+
+        string jsonResponse = await apiService.PostUser(jsonData);
+
+        Console.WriteLine(jsonResponse);
+
+        dynamic InfoUser = JsonConvert.DeserializeObject(jsonResponse);
+
+        UserService.UserId = InfoUser.id;
+        UserService.UserName = InfoUser.userName;
+
+        Console.WriteLine(UserService.UserId);
+        Console.WriteLine(UserService.UserName);
+
+        // Verificar si la respuesta indica éxito antes de navegar al índice.
+        if (jsonResponse == "Error al obtener resultado.")
+        {
+            // La solicitud no fue exitosa, puedes manejar el error aquí si es necesario.
+            Console.WriteLine("La solicitud no fue exitosa.");
+        }
+        else
+        {
+            // La solicitud fue exitosa, navegar al índice.
+            navManager.NavigateTo($"/Cursos");
+
+        }
+
+
+    }
+}
+

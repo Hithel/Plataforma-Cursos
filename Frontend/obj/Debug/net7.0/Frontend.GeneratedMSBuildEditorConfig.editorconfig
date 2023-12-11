@@ -1,0 +1,65 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Frontend
+build_property.RootNamespace = Frontend
+build_property.ProjectDir = C:\Users\ADMIN\Documents\Plataforma-Cursos\Frontend\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\ADMIN\Documents\Plataforma-Cursos\Frontend
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Pages/CafilicarCursos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FmaWxpY2FyQ3Vyc29zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Pages/Cursos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3Vyc29zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Pages/CursosCalificados.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3Vyc29zQ2FsaWZpY2Fkb3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/Card.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-rmjgulvh57
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/Card2.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENhcmQyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-boxcqg998i
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gknvvqa2uj
+
+[C:/Users/ADMIN/Documents/Plataforma-Cursos/Frontend/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9ljbyqraro

@@ -1,0 +1,63 @@
+@page "/CursosCalificados"
+
+
+@inject Frontend.Services.ApiService ApiService
+
+<PageTitle>CursosCalificados</PageTitle>
+
+<h1>Cursos Calificados!</h1>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4 col-lg-3">
+
+    @foreach (var CursoCalificados in ListCursos)
+    {
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Curso: @CursoCalificados.Titulo</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Puntaje: @CursoCalificados.Puntaje</h6>
+            <p class="card-text">Descripcion: @CursoCalificados.Descripcion</p>
+        </div>
+        </div>
+    }
+
+  </div>
+</div>
+
+
+@code {
+
+    List<CursoCalificados> ListCursos = new List<CursoCalificados>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Llamar al servicio ApiService para obtener el JSON
+        ApiService apiService = new ApiService(new HttpClient());
+        string jsonResponse = await apiService.GetCalificacion();
+
+        // Deserializar la respuesta JSON a una lista de objetos User
+        ListCursos = JsonConvert.DeserializeObject<List<CursoCalificados>>(jsonResponse);
+        
+         foreach (var CursoCalificados in ListCursos)
+        {
+
+             string JsonIdCurso = await apiService.GetCursoId(CursoCalificados.IdCursoFK);
+
+            // Deserializar el JSON del instructor para obtener el campo 'nombre' con un alias 'Nombre'
+            dynamic getIdCruso = JsonConvert.DeserializeObject(JsonIdCurso);
+            string NombreCurso = getIdCruso.titulo; // Suponiendo que 'nombre' es el campo que deseas
+
+            // Asignar el nombre del instructor al campo correspondiente en el curso (usando el alias)
+            CursoCalificados.Titulo = NombreCurso; 
+        } 
+
+    }
+
+    public class CursoCalificados
+    {
+        public int IdCursoFK { get; set;}
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public double Puntaje { get; set; }
+    }
+}
